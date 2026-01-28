@@ -20,14 +20,14 @@ export const auth = betterAuth({
     autoSignIn: false,
     requireEmailVerification: false,
   },
-  //   socialProviders: {
-  //     google: {
-  //       clientId: process.env.GOOGLE_CLIENT_ID as string,
-  //       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
-  //       prompt: "select_account consent",
-  //       accessType: "offline",
-  //     },
-  //   },
+    socialProviders: {
+      google: {
+        clientId: process.env.GOOGLE_CLIENT_ID as string,
+        clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
+        prompt: "select_account consent",
+        accessType: "offline",
+      },
+    },
 
   //   emailVerification: {
   //     sendOnSignUp: true,
