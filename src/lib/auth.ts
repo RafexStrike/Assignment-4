@@ -3,6 +3,7 @@ import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 import { prisma } from "./prisma";
 import nodemailer from "nodemailer";
+import { userRole } from "../middleware/auth.middleware";
 
 // const transporter = nodemailer.createTransport({
 //   host: "smtp.gmail.com",
@@ -20,14 +21,14 @@ export const auth = betterAuth({
     autoSignIn: false,
     requireEmailVerification: false,
   },
-    socialProviders: {
-      google: {
-        clientId: process.env.GOOGLE_CLIENT_ID as string,
-        clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
-        prompt: "select_account consent",
-        accessType: "offline",
-      },
+  socialProviders: {
+    google: {
+      clientId: process.env.GOOGLE_CLIENT_ID as string,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
+      prompt: "select_account consent",
+      accessType: "offline",
     },
+  },
 
   //   emailVerification: {
   //     sendOnSignUp: true,
@@ -114,7 +115,7 @@ export const auth = betterAuth({
     additionalFields: {
       role: {
         type: "string",
-        defaultValue: "STUDENT",
+        defaultValue: userRole.STUDENT,
         required: true,
       },
     },
