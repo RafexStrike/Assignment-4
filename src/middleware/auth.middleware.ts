@@ -1,12 +1,7 @@
 //src/ middleware/auth.middleware.ts
 import { NextFunction, Request, Response } from "express";
 import { auth as authVariableDefinedInAuthDotTsFile } from "../lib/auth";
-
-export enum userRole {
-  STUDENT = "STUDENT",
-  TUTOR = "TUTOR",
-  ADMIN = "ADMIN",
-}
+import { userRole } from "../types/user.type";
 
 declare global {
   namespace Express {

@@ -3,7 +3,7 @@ import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 import { prisma } from "./prisma";
 import nodemailer from "nodemailer";
-import { userRole } from "../middleware/auth.middleware";
+import { userRole } from "../types/user.type";
 
 // const transporter = nodemailer.createTransport({
 //   host: "smtp.gmail.com",

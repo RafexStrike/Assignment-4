@@ -1,7 +1,7 @@
 // src/app.ts
 import express from "express";
 import { toNodeHandler } from "better-auth/node";
-// import { auth } from "./lib/auth";
+import { TutorRoutes } from "./modules/tutor/tutor.router";
 import { auth } from "./lib/auth";
 import cors from "cors";
 
@@ -13,6 +13,8 @@ app.use(
     credentials: true,
   }),
 );
+
+app.use("/api/tutor", TutorRoutes);
 
 app.all("/api/auth/{*any}", toNodeHandler(auth));
 

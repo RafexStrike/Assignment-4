@@ -1,7 +1,8 @@
 // src/modules/tutor/tutor.router.ts
 import { Router } from "express";
 import { TutorController } from "./tutor.controller";
-import auth, { userRole } from "../../middleware/auth.middleware";
+import auth from "../../middleware/auth.middleware";
+import { userRole } from "../../types/user.type";
 
 const router = Router();
 
