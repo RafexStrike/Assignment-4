@@ -29,7 +29,7 @@ async function seedAdmin() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Origin: "http://localhost:3000",
+          Origin: "http://localhost:5000",
         },
         body: JSON.stringify(adminData),
       },
@@ -37,18 +37,18 @@ async function seedAdmin() {
 
     console.log(signUpAdmin);
 
-    // if (signUpAdmin.ok) {
-    //   console.log("*** Admin created ***");
-    //   await prisma.user.update({
-    //     where: {
-    //       email: adminData.email,
-    //     },
-    //     data: {
-    //       emailVerified: true,
-    //     },
-    //   });
-    //   console.log("*** Email verification status updated! ***");
-    // }
+    if (signUpAdmin.ok) {
+      console.log("*** Admin created ***");
+      await prisma.user.update({
+        where: {
+          email: adminData.email,
+        },
+        data: {
+          emailVerified: true,
+        },
+      });
+      console.log("*** Email verification status updated! ***");
+    }
     console.log("******* SUCCESS ******");
   } catch (error: any) {
     console.log("error message:", error.message);
