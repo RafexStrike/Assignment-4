@@ -21,10 +21,11 @@ export const auth = betterAuth({
     autoSignIn: true,
     requireEmailVerification: false,
   },
-  cookies: {
-    session: {
-      sameSite: "none",
-      secure: true,
+  advanced: {
+    defaultCookieAttributes: {
+      sameSite: "none", 
+      secure: true,     
+      httpOnly: true,
     },
   },
   // for forcing the emailVerified column on the database to be true
