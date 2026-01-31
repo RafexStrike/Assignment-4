@@ -1,7 +1,7 @@
 // src/script/seedAdmin.ts
-import { prisma } from "../lib/prisma";
+import { prisma } from "../lib/prisma.js";
 // import { userRole } from "../middleware/auth.middleware";
-import { userRole } from "../types/user.type";
+import { userRole } from "../types/user.type.js";
 
 async function seedAdmin() {
   try {

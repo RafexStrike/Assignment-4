@@ -1,5 +1,5 @@
 // src/modules/tutor/tutor.service.ts
-import { prisma } from "../../lib/prisma";
+import { prisma } from "../../lib/prisma.js";
 
 export interface CreateTutorProfileInput {
   bio?: string;

@@ -1,7 +1,7 @@
 // src/modules/public/public.controller.ts
 
 import { Request, Response } from "express";
-import { PublicService } from "./public.service";
+import { PublicService } from "./public.service.js";
 
 export const PublicController = {
   async listTutors(req: Request, res: Response) {

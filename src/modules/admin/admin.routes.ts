@@ -2,9 +2,9 @@
 
 
 import { Router } from "express";
-import { AdminController } from "./admin.controller";
-import auth from "../../middleware/auth.middleware";
-import { userRole } from "../../types/user.type";
+import { AdminController } from "./admin.controller.js";
+import auth from "../../middleware/auth.middleware.js";
+import { userRole } from "../../types/user.type.js";
 
 const router = Router();
 

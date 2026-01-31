@@ -1,5 +1,5 @@
 // src/script/seedCategories.ts
-import { prisma } from "../lib/prisma";
+import { prisma } from "../lib/prisma.js";
 
 const SUBJECTS = [
   { name: "Mathematics", description: "Algebra, Calculus, and Geometry" },

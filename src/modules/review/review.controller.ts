@@ -1,7 +1,7 @@
 // src/modules/review/review.controller.ts
 
 import { Request, Response } from "express";
-import { ReviewService } from "./review.service";
+import { ReviewService } from "./review.service.js";
 
 export const ReviewController = {
   async create(req: Request, res: Response) {

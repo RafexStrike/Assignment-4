@@ -1,9 +1,9 @@
 // src/modules/review/review.routes.ts
 
 import { Router } from "express";
-import { ReviewController } from "./review.controller";
-import auth from "../../middleware/auth.middleware";
-import { userRole } from "../../types/user.type";
+import { ReviewController } from "./review.controller.js";
+import auth from "../../middleware/auth.middleware.js";
+import { userRole } from "../../types/user.type.js";
 
 const router = Router();
 

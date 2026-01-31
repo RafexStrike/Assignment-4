@@ -1,6 +1,6 @@
 // src/modules/tutor/tutor.controller.ts
 import { Request, Response } from "express";
-import { TutorService } from "./tutor.service";
+import { TutorService } from "./tutor.service.js";
 
 export const TutorController = {
   // POST /api/tutor/profile

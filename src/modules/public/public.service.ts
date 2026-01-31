@@ -1,6 +1,6 @@
 // src/modules/public/public.service.ts
 
-import { prisma } from "../../lib/prisma";
+import { prisma } from "../../lib/prisma.js";
 
 export interface TutorFilters {
   page?: number | undefined;

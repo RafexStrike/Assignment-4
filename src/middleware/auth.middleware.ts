@@ -1,7 +1,7 @@
 //src/ middleware/auth.middleware.ts
 import { NextFunction, Request, Response } from "express";
-import { auth as authVariableDefinedInAuthDotTsFile } from "../lib/auth";
-import { userRole } from "../types/user.type";
+import { auth as authVariableDefinedInAuthDotTsFile } from "../lib/auth.js";
+import { userRole } from "../types/user.type.js";
 
 declare global {
   namespace Express {

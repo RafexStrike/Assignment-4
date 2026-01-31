@@ -1,6 +1,6 @@
 // src/modules/review/review.service.ts
 
-import { prisma } from "../../lib/prisma";
+import { prisma } from "../../lib/prisma.js";
 
 export interface CreateReviewInput {
   tutorId: string;

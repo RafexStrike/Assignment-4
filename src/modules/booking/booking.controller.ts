@@ -1,6 +1,6 @@
 // src/modules/booking/booking.controller.ts
 import { Request, Response } from "express";
-import { BookingService } from "./booking.service";
+import { BookingService } from "./booking.service.js";
 
 export const BookingController = {
   async create(req: Request, res: Response) {

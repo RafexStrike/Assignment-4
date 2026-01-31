@@ -1,7 +1,7 @@
 // src/modules/booking/booking.service.ts
-import { prisma } from "../../lib/prisma";
+import { prisma } from "../../lib/prisma.js";
 // import { BookingStatus } from "../../../generated/prisma/client";
-import { BookingStatus } from "../../generated/prisma/enums";
+import { BookingStatus } from "../../generated/prisma/enums.js";
 
 export interface CreateBookingInput {
   tutorId: string;

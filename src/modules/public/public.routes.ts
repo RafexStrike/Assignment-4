@@ -1,7 +1,7 @@
 // src/modules/public/public.routes.ts
 
 import { Router } from "express";
-import { PublicController } from "./public.controller";
+import { PublicController } from "./public.controller.js";
 
 const router = Router();
 

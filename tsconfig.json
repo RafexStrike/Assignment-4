@@ -7,10 +7,12 @@
 
     // Environment Settings
     // See also https://aka.ms/tsconfig/module
-    "module": "ESnext",
+    // "module": "ESnext",
+    "module": "NodeNext",
     "target": "ES2023",
 
-    "moduleResolution": "node",
+    // "moduleResolution": "node",
+    "moduleResolution": "NodeNext",
     "esModuleInterop": true,
     // "ignoreDeprecations": "6.0",
     // For nodejs:
