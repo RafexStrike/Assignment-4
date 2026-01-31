@@ -12,7 +12,7 @@
 
     "moduleResolution": "node",
     "esModuleInterop": true,
-    "ignoreDeprecations": "6.0",
+    // "ignoreDeprecations": "6.0",
     // For nodejs:
     "lib": ["esnext"],
     "types": ["node"],
