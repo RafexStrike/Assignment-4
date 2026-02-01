@@ -27,7 +27,7 @@ export const BookingService = {
     const now = new Date();
 
     if (startAt < now) throw new Error("Cannot book sessions in the past");
-    if (endAt <= startAt) throw new Error("End time must be after start time");
+    // if (endAt <= startAt) throw new Error("End time must be after start time");
 
     const durationHours =
       (endAt.getTime() - startAt.getTime()) / (1000 * 60 * 60);
