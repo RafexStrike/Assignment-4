@@ -59,8 +59,19 @@ export const BookingService = {
 
     // 4. Check tutor's recurring availability (optional but recommended)
     const dayOfWeek = startAt.getDay(); // 0-6
-    const timeStr = startAt.toISOString().slice(11, 16); // "HH:mm"
-    const endTimeStr = endAt.toISOString().slice(11, 16);
+    // const timeStr = startAt.toISOString().slice(11, 16);
+    // const endTimeStr = endAt.toISOString().slice(11, 16);
+    const timeStr = startAt.toLocaleTimeString("en-GB", {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false,
+    });
+
+    const endTimeStr = endAt.toLocaleTimeString("en-GB", {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false,
+    });
 
     const availabilitySlot = await prisma.availabilitySlot.findFirst({
       where: {
