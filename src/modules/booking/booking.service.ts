@@ -6,14 +6,13 @@ import { BookingStatus } from "../../generated/prisma/enums.js";
 export interface CreateBookingInput {
   tutorId: string;
   subject: string;
-  startAt: string; // ISO-like string sent from frontend
-  endAt: string;   // ISO-like string sent from frontend
+  startAt: string; // LOCAL datetime string
+  endAt: string;   // LOCAL datetime string
   notes?: string;
 }
 
 export const BookingService = {
-  async createBooking(studentId: string, data: CreateBookingInput) {
-    // 1. Validate tutor exists and is not the student
+   async createBooking(studentId: string, data: CreateBookingInput) {
     const tutor = await prisma.tutorProfile.findUnique({
       where: { id: data.tutorId },
       include: { user: true },
@@ -22,17 +21,14 @@ export const BookingService = {
     if (!tutor) throw new Error("Tutor not found");
     if (tutor.userId === studentId) throw new Error("Cannot book yourself");
 
-    // ============================================================
-    //  CRITICAL FIX: TREAT TIMES AS LOCAL (NO UTC SHIFT)
-    // ============================================================
-    const startAt = new Date(data.startAt.replace("Z", ""));
-    const endAt = new Date(data.endAt.replace("Z", ""));
+    // LOCAL TIME — DO NOT TOUCH UTC
+    const startAt = new Date(data.startAt);
+    const endAt = new Date(data.endAt);
     const now = new Date();
 
     if (startAt < now) throw new Error("Cannot book sessions in the past");
     if (endAt <= startAt) throw new Error("End time must be after start time");
 
-    // 2. Duration validation
     const durationHours =
       (endAt.getTime() - startAt.getTime()) / (1000 * 60 * 60);
 
@@ -40,32 +36,23 @@ export const BookingService = {
     if (durationHours < 0.5)
       throw new Error("Session must be at least 30 minutes");
 
-    // 3. Check for overlapping bookings
+    // Check overlap
     const existingBooking = await prisma.booking.findFirst({
       where: {
         tutorId: data.tutorId,
         status: { not: BookingStatus.CANCELLED },
         OR: [
-          {
-            startAt: { lte: startAt },
-            endAt: { gt: startAt },
-          },
-          {
-            startAt: { lt: endAt },
-            endAt: { gte: endAt },
-          },
+          { startAt: { lte: startAt }, endAt: { gt: startAt } },
+          { startAt: { lt: endAt }, endAt: { gte: endAt } },
         ],
       },
     });
 
-    if (existingBooking) {
+    if (existingBooking)
       throw new Error("Tutor is not available at this time");
-    }
 
-    // ============================================================
-    // LOCAL DAY + LOCAL TIME (MATCHES AVAILABILITY SLOTS)
-    // ============================================================
-    const dayOfWeek = startAt.getDay(); // 0–6 (LOCAL day)
+    //  LOCAL DAY + LOCAL TIME
+    const dayOfWeek = startAt.getDay();
 
     const timeStr = startAt.toLocaleTimeString("en-GB", {
       hour: "2-digit",
@@ -79,7 +66,6 @@ export const BookingService = {
       hour12: false,
     });
 
-    // Debug (keep until confirmed working)
     console.log("[BOOKING][TIME CHECK]", {
       startAt,
       endAt,
@@ -97,17 +83,14 @@ export const BookingService = {
       },
     });
 
-    if (!availabilitySlot) {
+    if (!availabilitySlot)
       throw new Error("Tutor is not available at this time slot");
-    }
 
-    // 5. Price calculation
     const price = tutor.hourlyRate
       ? tutor.hourlyRate * durationHours
       : 0;
 
-    // 6. Create booking
-    return await prisma.booking.create({
+    return prisma.booking.create({
       data: {
         studentId,
         tutorId: data.tutorId,
@@ -117,20 +100,6 @@ export const BookingService = {
         endAt,
         price,
         status: BookingStatus.CONFIRMED,
-      },
-      include: {
-        tutor: {
-          include: {
-            user: {
-              select: {
-                id: true,
-                name: true,
-                email: true,
-                image: true,
-              },
-            },
-          },
-        },
       },
     });
   },
