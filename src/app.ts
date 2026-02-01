@@ -13,12 +13,18 @@ const app = express();
 
 console.log("\n========== APP INITIALIZATION ==========");
 console.log("[APP] BETTER_AUTH_URL:", process.env.BETTER_AUTH_URL);
-console.log("[APP] CORS Origin:", process.env.BETTER_AUTH_URL || "http://localhost:3000");
+console.log(
+  "[APP] CORS Origin:",
+  process.env.BETTER_AUTH_URL || "http://localhost:3000",
+);
 console.log("========================================\n");
 
 app.use(
   cors({
-    origin: process.env.BETTER_AUTH_URL || "http://localhost:3000",
+    origin: [
+      "https://assignment-4-frontend-ten.vercel.app",
+      "http://localhost:3000",
+    ],
     credentials: true,
   }),
 );
@@ -30,7 +36,10 @@ app.use((req, res, next) => {
   console.log("[REQ] Origin:", req.get("origin"));
   console.log("[REQ] Cookies present:", !!req.headers.cookie);
   if (req.headers.cookie) {
-    console.log("[REQ] Cookie header:", req.headers.cookie.substring(0, 100) + "...");
+    console.log(
+      "[REQ] Cookie header:",
+      req.headers.cookie.substring(0, 100) + "...",
+    );
   }
   next();
 });
